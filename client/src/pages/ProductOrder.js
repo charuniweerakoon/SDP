@@ -164,8 +164,8 @@ function ResponsiveAppBar() {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}> {/* Increased the bottom margin */}
-              <Grid item xs={4}>
+            <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
+              <Grid item xs={3}>
                 <FormControl fullWidth variant="outlined">
                   <InputLabel id="productType-label">Product Type</InputLabel>
                   <Select
@@ -174,7 +174,7 @@ function ResponsiveAppBar() {
                     value={productType}
                     onChange={handleProductTypeChange}
                     label="Product Type"
-                    sx={{ maxWidth: '200px' }} // Adjust the width as needed
+                    sx={{ maxWidth: '200px' }}
                   >
                     <MenuItem value="">
                       <em>None</em>
@@ -185,7 +185,7 @@ function ResponsiveAppBar() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item  xs={3}>
                 <FormControl fullWidth variant="outlined">
                   <InputLabel id="size-label">Size</InputLabel>
                   <Select
@@ -194,7 +194,7 @@ function ResponsiveAppBar() {
                     value={size}
                     onChange={handleSizeChange}
                     label="Size"
-                    sx={{ maxWidth: '200px' }} // Adjust the width as needed
+                    sx={{ maxWidth: '200px' }}
                   >
                     <MenuItem value="">
                       <em>None</em>
@@ -205,7 +205,7 @@ function ResponsiveAppBar() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <TextField
                   fullWidth
                   id="quantity"
@@ -214,11 +214,24 @@ function ResponsiveAppBar() {
                   placeholder="Quantity"
                   value={quantity}
                   onChange={handleQuantityChange}
-                  sx={{ maxWidth: '100px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '100px' }}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  id="pickupDate"
+                  label="Pickup Date"
+                  type="date"
+                  variant="outlined"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  sx={{ maxWidth: '200px' }}
                 />
               </Grid>
             </Grid>
-              <Grid item xs={12} sx={{ mt: -7 }}>
+            <Grid item xs={12} sx={{ mt: -7 }}>
               <TextField
                 fullWidth
                 multiline
