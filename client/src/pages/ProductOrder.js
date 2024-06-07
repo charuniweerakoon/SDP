@@ -19,6 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Footer from './Footer'; // Import the Footer component
 import Navbar from '../Components/Navbar'
 
+//nimce
 const BackgroundBox = styled(Box)({
   position: 'relative',
   height: '70vh', // Adjust the height as needed
