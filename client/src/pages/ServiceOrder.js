@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -15,10 +15,10 @@ import Navbar from '../Components/Navbar';
 
 const BackgroundBox = styled(Box)({
   position: 'relative',
-  height: '70vh', // Adjust the height as needed
+  height: '70vh',
   '&::before': {
     content: '""',
-    backgroundImage: 'url(https://t4.ftcdn.net/jpg/03/82/43/91/360_F_382439158_a8zdPAPTgPGzIom7T8vF0dpi4B9TgZL6.jpg)', // Replace with your image path
+    backgroundImage: 'url(https://t4.ftcdn.net/jpg/03/82/43/91/360_F_382439158_a8zdPAPTgPGzIom7T8vF0dpi4B9TgZL6.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'absolute',
@@ -26,77 +26,68 @@ const BackgroundBox = styled(Box)({
     left: 0,
     width: '100%',
     height: '100%',
-    opacity: 0.5, // Adjust the opacity as needed
+    opacity: 0.5,
     zIndex: -1,
   },
 });
 
 const ContentBox = styled(Box)({
   backgroundColor: 'white',
-  padding: '20px', // Adjust padding to create space for inner border
-  borderRadius: '0px', // Adjust the border radius if needed
+  padding: '20px',
+  borderRadius: '0px',
   position: 'absolute',
-  top: 'calc(0px)', // Start after the app bar (64px) plus some space (20px)
-  left: '16%', // Some space from the left corner
-  right: '16%', // Some space from the right corner
-  bottom: '0px', // Some space from the bottom, before the footer
+  top: 'calc(0px)',
+  left: '16%',
+  right: '16%',
+  bottom: '0px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  opacity: 0.8, // Adjust the opacity as needed
-  display: 'flex', // Use flexbox
-  flexDirection: 'column', // Arrange children vertically
-  justifyContent: 'space-between', // Distribute the space
-});
-
-const InnerBox = styled(Box)({
-  border: '2px solid #B2BEB5', // Add the inner border
-  height: '100%', // Fill the parent container
-  padding: '20px', // Adjust padding inside the inner box
-  boxSizing: 'border-box', // Ensure padding is included in width and height
+  opacity: 0.8,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  position: 'relative', // To position the Confirm button at the bottom right
+});
+
+const InnerBox = styled(Box)({
+  border: '2px solid #B2BEB5',
+  height: '100%',
+  padding: '20px',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
 });
 
 const ConfirmButton = styled(Button)({
   backgroundColor: 'white',
   color: 'black',
   fontSize: '14px',
-  padding: '6px 16px', // Adjust the padding as needed
-  marginTop: '20px', // Adjust the top margin as needed
-  alignSelf: 'flex-end', // Center the button horizontally
-  whiteSpace: 'nowrap', // Keep the text on one line
-  maxWidth: '240px', // Set a max-width for the button
+  padding: '6px 16px',
+  marginTop: '20px',
+  alignSelf: 'flex-end',
+  whiteSpace: 'nowrap',
+  maxWidth: '240px',
   textTransform: 'capitalize',
-  borderColor: '#B2BEB5', // Set border color to black
-  borderWidth: '2px', // Set border width
-  borderStyle: 'solid', // Set border style
-  position: 'absolute', // Position the button at the bottom right
-  bottom: '20px', // Adjust as needed
-  right: '20px', // Adjust as needed
+  borderColor: '#B2BEB5',
+  borderWidth: '2px',
+  borderStyle: 'solid',
+  position: 'absolute',
+  bottom: '20px',
+  right: '20px',
 });
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [services, setServices] = React.useState({
+  const [services, setServices] = useState({
     tireInstallation: false,
     tireRotation: false,
     tireAlignment: false,
   });
+  const [appointmentTime, setAppointmentTime] = useState('');
 
   const handleServiceChange = (event) => {
     setServices({
       ...services,
       [event.target.name]: event.target.checked,
     });
-  };
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   return (
@@ -106,9 +97,9 @@ function ResponsiveAppBar() {
         <ContentBox>
           <InnerBox>
             <Typography variant="h7" gutterBottom>
-              Provide your relevant details to proceed the order.
+              Provide your relevant details to proceed with the order.
             </Typography>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -116,7 +107,7 @@ function ResponsiveAppBar() {
                   label="First Name"
                   variant="outlined"
                   placeholder="First Name"
-                  sx={{ maxWidth: '350px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -126,59 +117,71 @@ function ResponsiveAppBar() {
                   label="Last Name"
                   variant="outlined"
                   placeholder="Last Name"
-                  sx={{ maxWidth: '350px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
-            </Grid>
-
-            <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   id="email"
                   label="Email"
                   variant="outlined"
                   placeholder="Email"
-                  sx={{ width: '280px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   id="contactNumber"
                   label="Contact Number"
                   variant="outlined"
                   placeholder="Contact Number"
-                  sx={{ width: '200px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
-                  id="vehicleNumber"
-                  label="Vehicle Number"
-                  variant="outlined"
-                  placeholder="Vehicle Number"
-                  sx={{ width: '170px' }} // Adjust the width as needed
+                  id="appointmentDate"
+                  label="Appointment Date"
+                  type="date"
+                  sx={{ width: '100%' }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
-                  id="vehicleType"
-                  label="Vehicle Type"
-                  variant="outlined"
-                  placeholder="Vehicle Type"
-                  sx={{ width: '150px' }} // Adjust the width as needed
-                />
+                  id="appointmentTime"
+                  select
+                  label="Appointment Time"
+                  value={appointmentTime}
+                  onChange={(e) => setAppointmentTime(e.target.value)}
+                  sx={{width: '100%' }}
+                  SelectProps={{
+                    native: true,
+                  }}
+                >
+                  <option value="">Select a time</option>
+                  {[...Array(17)].map((_, index) => {
+                    let hour = 9 + Math.floor(index / 4); // Start from 9 AM
+                    let minute = (index % 4) * 15; // 0, 15, 30, 45
+                    if (hour >= 12) {
+                      hour++; // Skip 12 PM
+                      if (hour === 14) hour = 15; // Skip 1 PM
+                    }
+                    let timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${(hour < 12 ? 'AM' : 'PM')}`;
+                    return <option key={index} value={timeString}>{timeString}</option>;
+                  })}
+                </TextField>
               </Grid>
-            </Grid>
-
-            <FormControl component="fieldset" sx={{ mt: 2 }}>
-              <FormLabel component="legend">Select Services</FormLabel>
-              <FormGroup row>
-                <Grid container spacing={2}>
-                  <Grid item>
+              <Grid item xs={12}>
+                <FormControl component="fieldset" fullWidth>
+                  <FormLabel component="legend">Select Services</FormLabel>
+                  <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -189,8 +192,6 @@ function ResponsiveAppBar() {
                       }
                       label="Tire Installation"
                     />
-                  </Grid>
-                  <Grid item>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -201,8 +202,6 @@ function ResponsiveAppBar() {
                       }
                       label="Tire Rotation"
                     />
-                  </Grid>
-                  <Grid item>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -213,35 +212,37 @@ function ResponsiveAppBar() {
                       }
                       label="Tire or Wheel Alignment"
                     />
-                  </Grid>
-                </Grid>
-              </FormGroup>
-            </FormControl>
-
-            <Grid item xs={12} sx={{ mt: 2 }}>
-              <TextField
-                fullWidth
-                multiline
-                rows={3} // Adjust the number of rows as needed
-                id="message"
-                label="Your Message"
-                variant="outlined"
-                placeholder="Your Message"
-                sx={{ maxWidth: '600px' }} // Adjust the width as needed
-              />
+                  </FormGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={3}
+                  id="message"
+                  label="Your Message"
+                  variant="outlined"
+                  placeholder="Your Message"
+                  sx={{ maxWidth: '600px' }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ConfirmButton variant="contained">
+                  Confirm
+                </ConfirmButton>
+              </Grid>
             </Grid>
-            <ConfirmButton variant="contained">
-              Confirm
-            </ConfirmButton>
           </InnerBox>
         </ContentBox>
       </BackgroundBox>
-      <Footer /> {/* Add the Footer component */}
+      <Footer />
     </div>
   );
 }
 
 export default ResponsiveAppBar;
+
 
 // import React, { useState } from 'react';
 // import { styled } from '@mui/material/styles';
