@@ -116,7 +116,7 @@ function ResponsiveAppBar() {
         <ContentBox>
           <InnerBox>
             <Typography variant="h7" gutterBottom>
-              Provide your relevant details to proceed the order.
+              Provide relevant details to proceed the order.
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
