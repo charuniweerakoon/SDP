@@ -19,13 +19,12 @@ import FormControl from '@mui/material/FormControl';
 import Footer from './Footer'; // Import the Footer component
 import Navbar from '../Components/Navbar'
 
-//nimce
 const BackgroundBox = styled(Box)({
   position: 'relative',
-  height: '70vh', // Adjust the height as needed
+  height: '70vh',
   '&::before': {
     content: '""',
-    backgroundImage: 'url(https://t4.ftcdn.net/jpg/03/82/43/91/360_F_382439158_a8zdPAPTgPGzIom7T8vF0dpi4B9TgZL6.jpg)', // Replace with your image path
+    backgroundImage: 'url(https://t4.ftcdn.net/jpg/03/82/43/91/360_F_382439158_a8zdPAPTgPGzIom7T8vF0dpi4B9TgZL6.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'absolute',
@@ -33,54 +32,54 @@ const BackgroundBox = styled(Box)({
     left: 0,
     width: '100%',
     height: '100%',
-    opacity: 0.5, // Adjust the opacity as needed
+    opacity: 0.5,
     zIndex: -1,
   },
 });
 
 const ContentBox = styled(Box)({
   backgroundColor: 'white',
-  padding: '20px', // Adjust padding to create space for inner border
-  borderRadius: '0px', // Adjust the border radius if needed
+  padding: '20px',
+  borderRadius: '0px',
   position: 'absolute',
-  top: 'calc(0px)', // Start after the app bar (64px) plus some space (20px)
-  left: '16%', // Some space from the left corner
-  right: '16%', // Some space from the right corner
-  bottom: '0px', // Some space from the bottom, before the footer
+  top: 'calc(0px)',
+  left: '16%',
+  right: '16%',
+  bottom: '0px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  opacity: 0.8, // Adjust the opacity as needed
-  display: 'flex', // Use flexbox
-  flexDirection: 'column', // Arrange children vertically
-  justifyContent: 'space-between', // Distribute the space
-});
-
-const InnerBox = styled(Box)({
-  border: '2px solid #B2BEB5', // Add the inner border
-  height: '100%', // Fill the parent container
-  padding: '20px', // Adjust padding inside the inner box
-  boxSizing: 'border-box', // Ensure padding is included in width and height
+  opacity: 0.8,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  position: 'relative', // To position the Confirm button at the bottom right
+});
+
+const InnerBox = styled(Box)({
+  border: '2px solid #B2BEB5',
+  height: '100%',
+  padding: '20px',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  position: 'relative',
 });
 
 const ConfirmButton = styled(Button)({
   backgroundColor: 'white',
   color: 'black',
   fontSize: '14px',
-  padding: '6px 16px', // Adjust the padding as needed
-  marginTop: '20px', // Adjust the top margin as needed
-  alignSelf: 'flex-end', // Center the button horizontally
-  whiteSpace: 'nowrap', // Keep the text on one line
-  maxWidth: '240px', // Set a max-width for the button
+  padding: '6px 16px',
+  marginTop: '20px',
+  alignSelf: 'flex-end',
+  whiteSpace: 'nowrap',
+  maxWidth: '240px',
   textTransform: 'capitalize',
-  borderColor: '#B2BEB5', // Set border color to black
-  borderWidth: '2px', // Set border width
-  borderStyle: 'solid', // Set border style
-  position: 'absolute', // Position the button at the bottom right
-  bottom: '20px', // Adjust as needed
-  right: '20px', // Adjust as needed
+  borderColor: '#B2BEB5',
+  borderWidth: '2px',
+  borderStyle: 'solid',
+  position: 'absolute',
+  bottom: '20px',
+  right: '20px',
 });
 
 function ResponsiveAppBar() {
@@ -88,6 +87,7 @@ function ResponsiveAppBar() {
   const [productType, setProductType] = React.useState('');
   const [size, setSize] = React.useState('');
   const [quantity, setQuantity] = React.useState('');
+  const [sizeOptions, setSizeOptions] = React.useState([]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -98,7 +98,42 @@ function ResponsiveAppBar() {
   };
 
   const handleProductTypeChange = (event) => {
-    setProductType(event.target.value);
+    const selectedProductType = event.target.value;
+    setProductType(selectedProductType);
+
+    let newSizeOptions = [];
+    switch (selectedProductType) {
+      case 'type1': // PCR Tires
+        newSizeOptions = [
+          '195-15', '185-14', '195-14', '165-14', '145-70-12', '145-80-12', '155-12', '155-80-12',
+          '155-70-12', '155-65-13', '165-65-13', '165-80-13', '185-70-14', '175-70-14', '175-70-13',
+          '175-70-13', '175-65-15', '185-65-15', '185-65-15', '195-65-15', '175-65-15', '185-55-16',
+          '165-70-14', '155-70-12', '155-80-13', '165-70-13', '155-70-13', '155-65-14', '155-65-14',
+          '165-55-14', '165-55-14', '165-13', '155-65-13'
+        ];
+        break;
+      case 'type2': // Bike Tires
+        newSizeOptions = [
+          '130-90-15', '140-60-17', '90-90-17', '100-90-10', '100-90-18', '100-90-17', '300-18',
+          '300-18', '275-18', '120-80-17', '120-80-16', '90-90-17', '110/80/10', '275-17', '140-70-17',
+          '300-17', '110-80-17', '110-80-12', '100-80-12', '250-17', '225-17', '275-14', '275-18',
+          '300-17', '300-17', '275-17', '90/90/12', '140-60-17', '130-70-17', '100-90-18', '300-17',
+          '90-90-18', '275-18', '100-80-17', '120/70/13', '130/70/13', '100-90-14', '90-90-14'
+        ];
+        break;
+      case 'type3': // Batteries
+        newSizeOptions = [
+          '500 ML W/B', '1 L', 'Acid  1 L', 'Acid  750', 'Acid 500', '65 AH', '12v4  MF', 'Utz-5s',
+          '6N6- 3B', 'YB5L-BS', 'UTZ-7L-BS', 'YB7B-BS', 'YB2-5L-BS', 'UTX5L-BS', '12N9-BS', 'UTX9-BS',
+          'UTX7A-BS'
+        ];
+        break;
+      default:
+        newSizeOptions = [];
+    }
+
+    setSize('');
+    setSizeOptions(newSizeOptions);
   };
 
   const handleSizeChange = (event) => {
@@ -111,7 +146,7 @@ function ResponsiveAppBar() {
 
   return (
     <div>
-     <Navbar/>
+      <Navbar />
       <BackgroundBox>
         <ContentBox>
           <InnerBox>
@@ -126,7 +161,7 @@ function ResponsiveAppBar() {
                   label="First Name"
                   variant="outlined"
                   placeholder="First Name"
-                  sx={{ maxWidth: '350px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -136,7 +171,7 @@ function ResponsiveAppBar() {
                   label="Last Name"
                   variant="outlined"
                   placeholder="Last Name"
-                  sx={{ maxWidth: '350px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
             </Grid>
@@ -149,7 +184,7 @@ function ResponsiveAppBar() {
                   label="Email"
                   variant="outlined"
                   placeholder="Email"
-                  sx={{ maxWidth: '350px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '350px' }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -159,7 +194,7 @@ function ResponsiveAppBar() {
                   label="Contact Number"
                   variant="outlined"
                   placeholder="Contact Number"
-                  sx={{ maxWidth: '250px' }} // Adjust the width as needed
+                  sx={{ maxWidth: '250px' }}
                 />
               </Grid>
             </Grid>
@@ -185,7 +220,7 @@ function ResponsiveAppBar() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item  xs={3}>
+              <Grid item xs={3}>
                 <FormControl fullWidth variant="outlined">
                   <InputLabel id="size-label">Size</InputLabel>
                   <Select
@@ -199,9 +234,11 @@ function ResponsiveAppBar() {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="small">Small</MenuItem>
-                    <MenuItem value="medium">Medium</MenuItem>
-                    <MenuItem value="large">Large</MenuItem>
+                    {sizeOptions.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
@@ -235,12 +272,12 @@ function ResponsiveAppBar() {
               <TextField
                 fullWidth
                 multiline
-                rows={4} // Adjust the number of rows as needed
+                rows={4}
                 id="message"
                 label="Your Message"
                 variant="outlined"
                 placeholder="Your Message"
-                sx={{ maxWidth: '600px' }} // Adjust the width as needed
+                sx={{ maxWidth: '600px' }}
               />
             </Grid>
             <Typography variant="h7" sx={{ mt: 2 }}>
@@ -252,7 +289,7 @@ function ResponsiveAppBar() {
           </InnerBox>
         </ContentBox>
       </BackgroundBox>
-      <Footer /> {/* Add the Footer component */}
+      <Footer />
     </div>
   );
 }
