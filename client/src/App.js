@@ -9,7 +9,7 @@ import Login from "./pages/Shop/Login";
 import SignUp from "./pages/Shop/SignUp";
 import SidebarNavigation from "./pages/Shop/Sidebar";
 import Footer from "./pages/Home";
-// import ServiceOrder from "./pages/ServiceOrder";
+import ServiceOrder from "./pages/ServiceOrder";
 import AppbarCompany from "./pages/Shop/AppbarCompany";
 import Suppliers from "./pages/Shop/Suppliers";
 import Staff from "./pages/Shop/Staff";
@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/services" element={<Services />} />
           <Route path="/productorder" element={<ProductOrder />} />
-          {/* <Route path="/serviceorder" element={<ServiceOrder />} /> */}
+          <Route path="/serviceorder" element={<ServiceOrder />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
