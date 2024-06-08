@@ -69,7 +69,11 @@ const SidebarNavigation = () => {
         </ListItem>
         <ListItem button>
           <ListItemIcon><StorageIcon /></ListItemIcon>
-          <ListItemText primary="Inventory" />
+          <ListItemText primary="Products" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon><StorageIcon /></ListItemIcon>
+          <ListItemText primary="Services" />
         </ListItem>
         <ListItem button>
           <ListItemIcon><PeopleIcon /></ListItemIcon>
