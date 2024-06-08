@@ -29,6 +29,13 @@ const Staff = () => {
   };
 
   const addMember = () => {
+    // Check if any required field is empty
+    if (!newMember.name || !newMember.contactNumber || !newMember.email || !newMember.nicNumber) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Add the new member to the rows state
     setRows([...rows, { ...newMember }]);
     setNewMember({
       staffId: '',
