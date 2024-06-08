@@ -47,6 +47,8 @@ const ContentBox = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
+  alignItems: 'center', // Center items vertically
+  flexWrap: 'wrap', // Allow items to wrap to the next row
 });
 
 const BoxSection = styled(Box)({
@@ -105,6 +107,23 @@ const PlaceOrderButton = styled(Button)({
   borderStyle: 'solid',
 });
 
+// const Rectangle = styled(Box)({
+//   width: '100%',
+//   backgroundColor: '#B2BEB5',
+//   opacity: 0.9,
+//   padding: '20px',
+//   textAlign: 'center',
+//   marginTop: '20px', // Adjust as needed
+// });
+const Rectangle = styled(Box)({
+  width: '90%',
+  border: '1px solid #B2BEB5', // Border color
+  padding: '20px',
+  textAlign: 'center',
+  margin: '20px auto', // Center horizontally with top margin
+});
+
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -144,6 +163,13 @@ function ResponsiveAppBar() {
                 We offer a wide range of batteries, from budget-friendly options to top premium brands. With a large inventory in stock and access to thousands more through our supply chain network, we're confident we can provide the right battery for your needs.
               </Description>
             </Square>
+          </BoxSection>
+          <BoxSection>
+            <Rectangle>
+              <Typography>
+              Experience the Difference with Our Premium Tyres. From Reliable Budget Options to High-Performance Brands, We've Got Your Wheels Covered. Our Expert Team is Here to Help You Find the Perfect Fit for Your Vehicle. Drive with Confidence, Drive with Us!
+              </Typography>
+            </Rectangle>
           </BoxSection>
           <PlaceOrderButton component={Link} to="/productorder">Place Your Order Here</PlaceOrderButton>
         </ContentBox>
