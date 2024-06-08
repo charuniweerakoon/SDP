@@ -11,7 +11,7 @@ const originalSuppliers = [
 
 const Suppliers = () => {
   const [suppliers, setSuppliers] = useState(originalSuppliers);
-  const [form, setForm] = useState({ id: '', companyName: '', contactName: '', phone: '', email: '' });
+  const [form, setForm] = useState({ companyName: '', contactName: '', phone: '', email: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -28,7 +28,7 @@ const Suppliers = () => {
     } else {
       setSuppliers([...suppliers, form]);
     }
-    setForm({ id: '', companyName: '', contactName: '', phone: '', email: '' });
+    setForm({ companyName: '', contactName: '', phone: '', email: '' });
   };
 
   const handleEdit = (supplier) => {
@@ -48,7 +48,9 @@ const Suppliers = () => {
     const filteredSuppliers = originalSuppliers.filter(
       (supplier) =>
         supplier.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        supplier.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+        supplier.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.contactName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.phone.includes(searchTerm)
     );
     setSuppliers(filteredSuppliers);
   };
@@ -66,17 +68,6 @@ const Suppliers = () => {
         <Box sx={{ flexGrow: 1, p: 3, ml: '5px', width: 'calc(100% - 210px)', mt: '10px' }}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Supplier ID"
-                  name="id"
-                  value={form.id}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  required
-                />
-              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Company Name"
@@ -169,7 +160,7 @@ const Suppliers = () => {
                     </TableCell>
                   </TableRow>
                 ))}
-                </TableBody>
+              </TableBody>
             </Table>
           </TableContainer>
         </Box>

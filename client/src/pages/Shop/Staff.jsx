@@ -84,6 +84,7 @@ const Staff = () => {
               name="name"
               value={newMember.name}
               onChange={handleInputChange}
+              required
               sx={{ mr: 2 }}
             />
             <TextField
@@ -92,6 +93,7 @@ const Staff = () => {
               name="contactNumber"
               value={newMember.contactNumber}
               onChange={handleInputChange}
+              required
               sx={{ mr: 2 }}
             />
             <TextField
@@ -100,6 +102,7 @@ const Staff = () => {
               name="email"
               value={newMember.email}
               onChange={handleInputChange}
+              required
               sx={{ mr: 2 }}
             />
             <TextField
@@ -108,6 +111,7 @@ const Staff = () => {
               name="nicNumber"
               value={newMember.nicNumber}
               onChange={handleInputChange}
+              required
               sx={{ mr: 2 }}
             />
             <Button variant="contained" onClick={addMember} sx={{ ml: 'auto', mb: 2 }}>Add</Button>
