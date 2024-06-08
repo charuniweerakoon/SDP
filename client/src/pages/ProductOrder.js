@@ -18,7 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Footer from './Footer'; // Import the Footer component
 import Navbar from '../Components/Navbar'
-
+import swal from 'sweetalert2';
 
 const BackgroundBox = styled(Box)({
   position: 'relative',
@@ -143,6 +143,10 @@ function ResponsiveAppBar() {
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
+  };
+
+  const handleConfirmButtonClick = () => {
+    swal.fire('Thank You for Choosing Us!', '', 'success');
   };
 
   return (
@@ -284,7 +288,7 @@ function ResponsiveAppBar() {
             <Typography variant="h7" sx={{ mt: 2 }}>
               Please collect your order within three days.
             </Typography>
-            <ConfirmButton variant="contained">
+            <ConfirmButton variant="contained" onClick={handleConfirmButtonClick}>
               Confirm
             </ConfirmButton>
           </InnerBox>
