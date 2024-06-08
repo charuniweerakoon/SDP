@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Footer from './Footer';
 import Navbar from '../Components/Navbar';
+import swal from 'sweetalert2'; // Import SweetAlert2
 
 const BackgroundBox = styled(Box)({
   position: 'relative',
@@ -77,7 +78,7 @@ const ConfirmButton = styled(Button)({
   marginBottom: '20px', // Add margin to the bottom
 });
 
-function ResponsiveAppBar() {
+function ServiceOrder() {
   const [services, setServices] = useState({
     tireInstallation: false,
     tireRotation: false,
@@ -90,6 +91,10 @@ function ResponsiveAppBar() {
       ...services,
       [event.target.name]: event.target.checked,
     });
+  };
+
+  const handleConfirmButtonClick = () => {
+    swal.fire('Thank You for Choosing Us!', '', 'success');
   };
 
   return (
@@ -229,7 +234,7 @@ function ResponsiveAppBar() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <ConfirmButton variant="contained">
+                <ConfirmButton variant="contained" onClick={handleConfirmButtonClick}>
                   Confirm
                 </ConfirmButton>
               </Grid>
@@ -242,4 +247,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default ServiceOrder;
