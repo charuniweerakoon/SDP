@@ -79,7 +79,7 @@ const Staff = () => {
           />
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <TextField
-              label="Add a member"
+              label="Name"
               variant="outlined"
               name="name"
               value={newMember.name}
