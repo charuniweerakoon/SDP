@@ -47,17 +47,14 @@ const ContentBox = styled(Box)({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   opacity: 0.8,
   display: 'flex', // Use flexbox
-  flexDirection: 'row',
-  justifyContent: 'space-around', // Distribute the boxes evenly
+  flexDirection: 'column', // Stack children vertically
+  alignItems: 'center', // Center children horizontally
 });
 
 const BoxSection = styled(Box)({
-  flex: 1,
+  margin: '20px 0', // Add margin between sections
   display: 'flex',
-  flexDirection: 'column', // Align text in a column
-  justifyContent: 'top', // Center the content vertically
-  alignItems: 'flex-start', // Align text to the left
-  margin: '0 4px', // Add some margin to the sides
+  justifyContent: 'center', // Center children horizontally
 });
 
 const Square = styled(Box)({
@@ -69,7 +66,9 @@ const Square = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'top',
   alignItems: 'center',
+  margin: '0 10px', // Add margin between squares
 });
+
 
 const Title = styled(Typography)({
   fontFamily: 'Times New Roman, serif',
@@ -87,29 +86,26 @@ const PlaceOrderButton = styled(Button)({
   color: 'black',
   fontSize: '14px',
   padding: '6px 16px', // Adjust the padding as needed
-  marginTop: '410px', // Adjust the top margin as needed
-  position: 'absolute', // Position the button absolutely
-  right: '55px', // Align the button to the right edge
-  whiteSpace: 'nowrap', // Keep the text on one line
-  maxWidth: '240px', // Set a max-width for the button
+  position: 'absolute',
+  bottom: '20px',
+  right: '20px',
   textTransform: 'capitalize',
-  //margin: '10px', // Add a black color margin
   borderColor: 'black', // Set border color to black
   borderWidth: '1px', // Set border width
   borderStyle: 'solid', // Set border style
 });
 
+
+const Rectangle = styled(Box)({
+  width: '90%',
+  border: '1px solid #B2BEB5',
+  padding: '10px',
+  textAlign: 'center',
+  margin: '20px auto',
+  marginTop: '-20px'
+});
+
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   return (
     <div>
       <Navbar/>
@@ -120,22 +116,25 @@ function ResponsiveAppBar() {
               <Title sx={{ marginLeft: '-155px' }}>Tire Installation</Title>
               <img src="\images\s1.jpg" alt="Tire Installation" style={{ width: '80%', height: '100%' }} />
             </Square>
-          </BoxSection>
-          <BoxSection>
             <Square>
               <Title sx={{ marginLeft: '-185px' }}>Tire Rotation</Title>
               <img src="\images\s2.jpg" alt="Tire Rotation" style={{ width: '80%', height: '100%' }} />
             </Square>
-          </BoxSection>
-          <BoxSection>
             <Square>
               <Title sx={{ marginLeft: '-65px' }}>Tire or Wheel Alignment</Title>
               <img src="\images\s3.jpg" alt="Tire or wheel Alignment" style={{ width: '80%', height: '100%' }} />
             </Square>
           </BoxSection>
-          <Link to="/serviceorder" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <PlaceOrderButton>Place Your Order Here</PlaceOrderButton>
-          </Link>
+          <BoxSection>
+            <Rectangle>
+              <Typography variant="body1">Experience the Difference with Our Premium Tyre Services. From precise Tyre Installation to thorough Tyre Rotation and precise Wheel Alignment, we ensure your vehicle runs smoothly and safely. Our expert team is dedicated to providing high-quality service, ensuring your safety on the road. Drive with Confidence, Drive with Us!</Typography>
+            </Rectangle>
+          </BoxSection>
+          <BoxSection>
+            <Link to="/serviceorder" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <PlaceOrderButton>Place Your Order Here</PlaceOrderButton>
+            </Link>
+          </BoxSection>
         </ContentBox>
       </BackgroundBox>
       <Footer /> {/* Add the Footer component here */}
