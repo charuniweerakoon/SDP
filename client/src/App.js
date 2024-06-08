@@ -13,7 +13,8 @@ import ServiceOrder from "./pages/ServiceOrder";
 import AppbarCompany from "./pages/Shop/AppbarCompany";
 import Suppliers from "./pages/Shop/Suppliers";
 import Staff from "./pages/Shop/Staff";
-import Inventory from "./pages/Shop/Products";
+import ProductList from "./pages/Shop/ProductList";
+import ServiceList from "./pages/Shop/ServiceList";
 import Orders from "./pages/Shop/Orders";
 import Messages from "./pages/Shop/Messages";
 import { AppBarTitleProvider } from "./pages/Shop/AppBarTitleContext";
@@ -34,7 +35,8 @@ export default function App() {
           <Route path="/sidebar" element={<SidebarNavigation />} />
           <Route path="/appbarcompany" element={<AppbarCompany />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/inventory" element={<Products />} />
+          <Route path="/productlist" element={<ProductList />} />
+          <Route path="/servicelist" element={<ServiceList />} />
           <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/staff" element={<Staff />} />
           <Route path="/messages" element={<Messages />} />
