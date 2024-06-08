@@ -29,7 +29,7 @@ const ServiceList = () => {
   };
 
   const addService = () => {
-    if (!newService.serviceName || !newService.price || !newService.description) {
+    if (!newService.serviceId || !newService.serviceName || !newService.price || !newService.description) {
       setError('Please fill in all fields.');
       return;
     }
@@ -82,6 +82,15 @@ const ServiceList = () => {
             sx={{ mb: 2 }}
           />
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+            <TextField
+              label="Service ID"
+              variant="outlined"
+              name="serviceId"
+              value={newService.serviceId}
+              onChange={handleInputChange}
+              required
+              sx={{ mr: 2 }}
+            />
             <TextField
               label="Service Name"
               variant="outlined"
