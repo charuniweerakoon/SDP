@@ -3,14 +3,17 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";
 
+const originalSuppliers = [
+  { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
+  { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
+  // Add more rows as needed
+];
+
 const Suppliers = () => {
-  const [suppliers, setSuppliers] = useState([
-    { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
-    { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
-    // Add more rows as needed
-  ]);
+  const [suppliers, setSuppliers] = useState(originalSuppliers);
   const [form, setForm] = useState({ id: '', companyName: '', contactName: '', phone: '', email: '' });
   const [isEditing, setIsEditing] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +38,24 @@ const Suppliers = () => {
 
   const handleDelete = (id) => {
     setSuppliers(suppliers.filter(supplier => supplier.id !== id));
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearch = () => {
+    const filteredSuppliers = originalSuppliers.filter(
+      (supplier) =>
+        supplier.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSuppliers(filteredSuppliers);
+  };
+
+  const handleReset = () => {
+    setSearchTerm('');
+    setSuppliers(originalSuppliers);
   };
 
   return (
@@ -107,6 +128,21 @@ const Suppliers = () => {
               </Grid>
             </Grid>
           </form>
+          <Grid item xs={12} sx={{ mt: 2 }}>
+            <TextField
+              label="Search"
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+              fullWidth
+              margin="normal"
+            />
+            <Button onClick={handleSearch} variant="contained" color="primary" sx={{ ml: 2 }}>
+              Search
+            </Button>
+            <Button onClick={handleReset} variant="contained" color="primary" sx={{ ml: 2 }}>
+              Reset
+            </Button>
+          </Grid>
           <TableContainer component={Paper} sx={{ mt: 2 }}>
             <Table>
               <TableHead>
@@ -133,7 +169,7 @@ const Suppliers = () => {
                     </TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+                </TableBody>
             </Table>
           </TableContainer>
         </Box>
