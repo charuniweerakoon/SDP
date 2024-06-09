@@ -146,7 +146,7 @@
 // export default ServiceList;
 
 import React, { useState } from 'react';
-import axios from 'axios'; // Make sure to install axios: npm install axios
+import axios from 'axios'; 
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Typography } from '@mui/material';
 import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";

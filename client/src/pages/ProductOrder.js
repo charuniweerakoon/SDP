@@ -147,176 +147,184 @@ function ResponsiveAppBar() {
 
   const handleTotalAmountChange = (event) => {
     setTotalAmount(event.target.value);
-  };
+};
 
-  const handleMessageChange = (event) => {
+const handleMessageChange = (event) => {
     setMessage(event.target.value);
-  };
+};
 
-  const handleConfirmButtonClick = () => {
+const handleConfirmButtonClick = () => {
     swal.fire('Thank You for Choosing Us!', '', 'success');
-  };
+};
 
-  return (
+return (
     <div>
-      <Navbar />
-      <BackgroundBox>
-        <ContentBox>
-          <InnerBox>
-            <Typography variant="h7" gutterBottom>
-              Provide relevant details to proceed the order.
-            </Typography>
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  variant="outlined"
-                  placeholder="First Name"
-                  sx={{ maxWidth: '350px' }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  variant="outlined"
-                  placeholder="Last Name"
-                  sx={{ maxWidth: '350px' }}
-                />
-              </Grid>
-            </Grid>
+        <Navbar />
+        <BackgroundBox>
+            <ContentBox>
+                <InnerBox>
+                    <Typography variant="h7" gutterBottom>
+                        Provide relevant details to proceed the order.
+                    </Typography>
+                    <Grid container spacing={1}>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id="firstName"
+                                label="First Name"
+                                variant="outlined"
+                                placeholder="First Name"
+                                sx={{ maxWidth: '350px' }}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id="lastName"
+                                label="Last Name"
+                                variant="outlined"
+                                placeholder="Last Name"
+                                sx={{ maxWidth: '350px' }}
+                                required
+                            />
+                        </Grid>
+                    </Grid>
 
-            <Grid container spacing={1} sx={{ mt: 1 }}>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  variant="outlined"
-                  placeholder="Email"
-                  sx={{ maxWidth: '350px' }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  id="contactNumber"
-                  label="Contact Number"
-                  variant="outlined"
-                  placeholder="Contact Number"
-                  sx={{ maxWidth: '250px' }}
-                />
-              </Grid>
-            </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id="email"
+                                label="Email"
+                                variant="outlined"
+                                placeholder="Email"
+                                sx={{ maxWidth: '350px' }}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                id="contactNumber"
+                                label="Contact Number"
+                                variant="outlined"
+                                placeholder="Contact Number"
+                                sx={{ maxWidth: '250px' }}
+                                required
+                            />
+                        </Grid>
+                    </Grid>
 
-            <Grid container spacing={1} sx={{ mt: 1 }}>
-              <Grid item xs={2}>
-                <FormControl fullWidth>
-                  <InputLabel>Product Type</InputLabel>
-                  <Select
-                    value={productType}
-                    onChange={handleProductTypeChange}
-                    label="Product Type"
-                    variant="outlined"
-                    sx={{ maxWidth: '250px' }}
-                  >
-                    <MenuItem value="type1">PCR Tires</MenuItem>
-                    <MenuItem value="type2">Bike Tires</MenuItem>
-                    <MenuItem value="type3">Batteries</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={2}>
-                <FormControl fullWidth>
-                  <InputLabel>Size</InputLabel>
-                  <Select
-                    value={size}
-                    onChange={handleSizeChange}
-                    label="Size"
-                    variant="outlined"
-                    sx={{ maxWidth: '250px' }}
-                  >
-                    {sizeOptions.map((sizeOption) => (
-                      <MenuItem key={sizeOption} value={sizeOption}>
-                        {sizeOption}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={2}>
-                <TextField
-                  fullWidth
-                  id="quantity"
-                  label="Quantity"
-                  variant="outlined"
-                  placeholder="Quantity"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  sx={{ maxWidth: '250px' }}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <TextField
-                  fullWidth
-                  id="pickupDate"
-                  label="Pickup Date"
-                  variant="outlined"
-                  type="date"
-                  value={pickupDate}
-                  onChange={handlePickupDateChange}
-                  sx={{ maxWidth: '250px' }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-            </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item xs={3}>
+                            <FormControl fullWidth required>
+                                <InputLabel>Product Type</InputLabel>
+                                <Select
+                                    value={productType}
+                                    onChange={handleProductTypeChange}
+                                    label="Product Type"
+                                    variant="outlined"
+                                    sx={{ maxWidth: '250px' }}
+                                    required
+                                >
+                                    <MenuItem value="type1">PCR Tires</MenuItem>
+                                    <MenuItem value="type2">Bike Tires</MenuItem>
+                                    <MenuItem value="type3">Batteries</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <FormControl fullWidth required>
+                                <InputLabel>Size</InputLabel>
+                                <Select
+                                    value={size}
+                                    onChange={handleSizeChange}
+                                    label="Size"
+                                    variant="outlined"
+                                    sx={{ maxWidth: '250px' }}
+                                    required
+                                >
+                                    {sizeOptions.map((sizeOption) => (
+                                        <MenuItem key={sizeOption} value={sizeOption}>
+                                            {sizeOption}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                fullWidth
+                                id="quantity"
+                                label="Quantity"
+                                variant="outlined"
+                                placeholder="Quantity"
+                                value={quantity}
+                                onChange={handleQuantityChange}
+                                sx={{ maxWidth: '250px' }}
+                                required
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                fullWidth
+                                id="pickupDate"
+                                label="Pickup Date"
+                                variant="outlined"
+                                type="date"
+                                value={pickupDate}
+                                onChange={handlePickupDateChange}
+                                sx={{ maxWidth: '250px' }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                required
+                            />
+                        </Grid>
+                    </Grid>
 
-            <Grid container spacing={1} sx={{ mt: 1 }}>
-              <Grid item xs={2}>
-                <TextField
-                  fullWidth
-                  id="totalAmount"
-                  label="Total Amount"
-                  variant="outlined"
-                  placeholder="Total Amount"
-                  value={totalAmount}
-                  onChange={handleTotalAmountChange}
-                  sx={{ maxWidth: '250px' }}
-                />
-              </Grid>
-            </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item xs={2}>
+                            <TextField
+                                fullWidth
+                                id="totalAmount"
+                                label="Total Amount"
+                                variant="outlined"
+                                placeholder="Total Amount"
+                                value={totalAmount}
+                                onChange={handleTotalAmountChange}
+                                sx={{ maxWidth: '250px' }}
+                            />
+                        </Grid>
+                    </Grid>
 
-            <Grid container spacing={1} sx={{ mt: 1 }}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id="message"
-                  label="Message"
-                  variant="outlined"
-                  placeholder="Message"
-                  multiline
-                  rows={4}
-                  value={message}
-                  onChange={handleMessageChange}
-                  sx={{ maxWidth: '700px' }}
-                />
-              </Grid>
-            </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                id="message"
+                                label="Message"
+                                variant="outlined"
+                                placeholder="Message"
+                                multiline
+                                rows={4}
+                                value={message}
+                                onChange={handleMessageChange}
+                                sx={{ maxWidth: '700px' }}
+                            />
+                        </Grid>
+                    </Grid>
 
-            <ConfirmButton onClick={handleConfirmButtonClick}>
-              Confirm
-            </ConfirmButton>
-          </InnerBox>
-        </ContentBox>
-      </BackgroundBox>
-      <Footer /> {/* Add the Footer component here */}
+                    <ConfirmButton onClick={handleConfirmButtonClick}>
+                        Confirm
+                    </ConfirmButton>
+                </InnerBox>
+            </ContentBox>
+        </BackgroundBox>
+        <Footer /> {/* Add the Footer component here */}
     </div>
-  );
+);
 }
 
 export default ResponsiveAppBar;
