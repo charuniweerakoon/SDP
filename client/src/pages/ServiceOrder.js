@@ -116,6 +116,7 @@ function ServiceOrder() {
                   variant="outlined"
                   placeholder="First Name"
                   sx={{ maxWidth: '350px' }}
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
@@ -126,6 +127,7 @@ function ServiceOrder() {
                   variant="outlined"
                   placeholder="Last Name"
                   sx={{ maxWidth: '350px' }}
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
@@ -136,6 +138,7 @@ function ServiceOrder() {
                   variant="outlined"
                   placeholder="Email"
                   sx={{ maxWidth: '350px' }}
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
@@ -146,6 +149,7 @@ function ServiceOrder() {
                   variant="outlined"
                   placeholder="Contact Number"
                   sx={{ maxWidth: '350px' }}
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
@@ -158,6 +162,7 @@ function ServiceOrder() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  required
                 />
               </Grid>
               <Grid item xs={6}>
@@ -171,6 +176,7 @@ function ServiceOrder() {
                   SelectProps={{
                     native: true,
                   }}
+                  required
                 >
                   <option value="">Select a time</option>
                   {[...Array(17)].map((_, index) => {
@@ -212,7 +218,7 @@ function ServiceOrder() {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={services.tireAlignment}
+                        checked={services.tireAlignment}
                           onChange={handleServiceChange}
                           name="tireAlignment"
                         />
