@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
 import Footer from './Footer'; // Import the Footer component
-import Navbar from '../Components/Navbar'
+import Navbar from '../Components/Navbar';
 import swal from 'sweetalert2';
 
 const BackgroundBox = styled(Box)({
@@ -84,11 +77,14 @@ const ConfirmButton = styled(Button)({
 });
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [productType, setProductType] = React.useState('');
-  const [size, setSize] = React.useState('');
-  const [quantity, setQuantity] = React.useState('');
-  const [sizeOptions, setSizeOptions] = React.useState([]);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [productType, setProductType] = useState('');
+  const [size, setSize] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [pickupDate, setPickupDate] = useState('');
+  const [totalAmount, setTotalAmount] = useState('');
+  const [sizeOptions, setSizeOptions] = useState([]);
+  const [message, setMessage] = useState('');
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -145,6 +141,18 @@ function ResponsiveAppBar() {
     setQuantity(event.target.value);
   };
 
+  const handlePickupDateChange = (event) => {
+    setPickupDate(event.target.value);
+  };
+
+  const handleTotalAmountChange = (event) => {
+    setTotalAmount(event.target.value);
+  };
+
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
   const handleConfirmButtonClick = () => {
     swal.fire('Thank You for Choosing Us!', '', 'success');
   };
@@ -158,7 +166,7 @@ function ResponsiveAppBar() {
             <Typography variant="h7" gutterBottom>
               Provide relevant details to proceed the order.
             </Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -181,7 +189,7 @@ function ResponsiveAppBar() {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid container spacing={1} sx={{ mt: 1 }}>
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -204,50 +212,42 @@ function ResponsiveAppBar() {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} sx={{ mt: 1, mb: 10 }}>
-              <Grid item xs={3}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel id="productType-label">Product Type</InputLabel>
+            <Grid container spacing={1} sx={{ mt: 1 }}>
+              <Grid item xs={2}>
+                <FormControl fullWidth>
+                  <InputLabel>Product Type</InputLabel>
                   <Select
-                    labelId="productType-label"
-                    id="productType"
                     value={productType}
                     onChange={handleProductTypeChange}
                     label="Product Type"
-                    sx={{ maxWidth: '200px' }}
+                    variant="outlined"
+                    sx={{ maxWidth: '250px' }}
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
                     <MenuItem value="type1">PCR Tires</MenuItem>
                     <MenuItem value="type2">Bike Tires</MenuItem>
                     <MenuItem value="type3">Batteries</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={3}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel id="size-label">Size</InputLabel>
+              <Grid item xs={2}>
+                <FormControl fullWidth>
+                  <InputLabel>Size</InputLabel>
                   <Select
-                    labelId="size-label"
-                    id="size"
                     value={size}
                     onChange={handleSizeChange}
                     label="Size"
-                    sx={{ maxWidth: '200px' }}
+                    variant="outlined"
+                    sx={{ maxWidth: '250px' }}
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {sizeOptions.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
+                    {sizeOptions.map((sizeOption) => (
+                      <MenuItem key={sizeOption} value={sizeOption}>
+                        {sizeOption}
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
                 <TextField
                   fullWidth
                   id="quantity"
@@ -256,50 +256,67 @@ function ResponsiveAppBar() {
                   placeholder="Quantity"
                   value={quantity}
                   onChange={handleQuantityChange}
-                  sx={{ maxWidth: '100px' }}
+                  sx={{ maxWidth: '250px' }}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
                 <TextField
                   fullWidth
                   id="pickupDate"
                   label="Pickup Date"
-                  type="date"
                   variant="outlined"
+                  type="date"
+                  value={pickupDate}
+                  onChange={handlePickupDateChange}
+                  sx={{ maxWidth: '250px' }}
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  sx={{ maxWidth: '200px' }}
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} sx={{ mt: -7 }}>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                id="message"
-                label="Your Message"
-                variant="outlined"
-                placeholder="Your Message"
-                sx={{ maxWidth: '600px' }}
-              />
+
+            <Grid container spacing={1} sx={{ mt: 1 }}>
+              <Grid item xs={2}>
+                <TextField
+                  fullWidth
+                  id="totalAmount"
+                  label="Total Amount"
+                  variant="outlined"
+                  placeholder="Total Amount"
+                  value={totalAmount}
+                  onChange={handleTotalAmountChange}
+                  sx={{ maxWidth: '250px' }}
+                />
+              </Grid>
             </Grid>
-            <Typography variant="h7" sx={{ mt: 2 }}>
-              Please collect your order within three days.
-            </Typography>
-            <ConfirmButton variant="contained" onClick={handleConfirmButtonClick}>
+
+            <Grid container spacing={1} sx={{ mt: 1 }}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="message"
+                  label="Message"
+                  variant="outlined"
+                  placeholder="Message"
+                  multiline
+                  rows={4}
+                  value={message}
+                  onChange={handleMessageChange}
+                  sx={{ maxWidth: '700px' }}
+                />
+              </Grid>
+            </Grid>
+
+            <ConfirmButton onClick={handleConfirmButtonClick}>
               Confirm
             </ConfirmButton>
           </InnerBox>
         </ContentBox>
       </BackgroundBox>
-      <Footer />
+      <Footer /> {/* Add the Footer component here */}
     </div>
   );
 }
 
 export default ResponsiveAppBar;
-
-
-
