@@ -85,6 +85,7 @@ function ServiceOrder() {
     tireAlignment: false,
   });
   const [appointmentTime, setAppointmentTime] = useState('');
+  const [totalAmount, setTotalAmount] = useState('');
 
   const handleServiceChange = (event) => {
     setServices({
@@ -217,6 +218,16 @@ function ServiceOrder() {
                         />
                       }
                       label="Tire or Wheel Alignment"
+                    />
+                    <TextField
+                      fullWidth
+                      id="totalAmount"
+                      label="Total Amount"
+                      variant="outlined"
+                      placeholder="Total Amount"
+                      value={totalAmount}
+                      onChange={(e) => setTotalAmount(e.target.value)}
+                      sx={{ maxWidth: '200px', marginLeft: '20px' }}
                     />
                   </FormGroup>
                 </FormControl>
