@@ -30,6 +30,21 @@ const Orders = () => {
   ];
 
   const [orders, setOrders] = useState(ordersData);
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    name: '',
+    contactNumber: '',
+    date: '',
+    orderStatus: '',
+    orderType: '',
+    serviceType: [],
+    productType: '',
+    size: '',
+    totalAmount: '',
+  });
+
+  const [showServiceForm, setShowServiceForm] = useState(false);
+  const [showProductForm, setShowProductForm] = useState(false);
 
   const handleStatusChange = (orderId, status) => {
     setOrders(orders.map(order =>
@@ -48,20 +63,48 @@ const Orders = () => {
   const productOrders = orders.filter(order => order.orderType === 'Product').length;
   const serviceOrders = orders.filter(order => order.orderType === 'Service').length;
 
-  const [formData, setFormData] = useState({
-    name: '',
-    contactNumber: '',
-    date: '',
-    orderStatus: '',
-    orderType: '',
-    serviceType: [],
-    productType: '',
-    size: '',
-    totalAmount: '',
-  });
+  const validateForm = () => {
+    let tempErrors = {};
+    if (!formData.name) tempErrors.name = 'Required';
+    if (!formData.contactNumber) tempErrors.contactNumber = 'Required';
+    if (!formData.date) tempErrors.date = 'Required';
+    if (!formData.orderStatus) tempErrors.orderStatus = 'Required';
+    if (!formData.orderType) tempErrors.orderType = 'Required';
+    if (formData.orderType === 'Service' && formData.serviceType.length === 0) tempErrors.serviceType = 'Required';
+    if (formData.orderType === 'Product' && !formData.productType) tempErrors.productType = 'Required';
+    if (formData.orderType === 'Product' && !formData.size) tempErrors.size = 'Required';
+    if (!formData.totalAmount) tempErrors.totalAmount = 'Required';
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
 
-  const [showServiceForm, setShowServiceForm] = useState(false);
-  const [showProductForm, setShowProductForm] = useState(false);
+  const handleAddOrder = () => {
+    if (validateForm()) {
+      const newOrder = {
+        orderId: (orders.length + 1).toString(),
+        customerId: (orders.length + 1).toString(),
+        orderDate: formData.date,
+        orderType: formData.orderType,
+        totalAmount: formData.totalAmount,
+        status: formData.orderStatus,
+      };
+      setOrders([...orders, newOrder]);
+      setFormData({
+        name: '',
+        contactNumber: '',
+        date: '',
+        orderStatus: '',
+        orderType: '',
+        serviceType: [],
+        productType: '',
+        size: '',
+        totalAmount: '',
+      });
+      setShowServiceForm(false);
+      setShowProductForm(false);
+      setErrors({});
+    }
+  };
 
   return (
     <>
@@ -110,6 +153,8 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.name}
+                  helperText={errors.name}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -121,6 +166,8 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.contactNumber}
+                  helperText={errors.contactNumber}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -132,6 +179,8 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.date}
+                  helperText={errors.date}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -144,6 +193,8 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.orderStatus}
+                  helperText={errors.orderStatus}
                 >
                   {['Pending', 'Completed', 'Cancelled'].map((status) => (
                     <MenuItem key={status} value={status}>
@@ -171,6 +222,8 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.orderType}
+                  helperText={errors.orderType}
                 >
                   {['Service', 'Product'].map((type) => (
                     <MenuItem key={type} value={type}>
@@ -220,18 +273,16 @@ const Orders = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={
-4}>
+                  <Grid item xs={4}>
                     <FormControlLabel
                       control={<Checkbox />}
-                      label="Tire or Wheel Alignment"
+                      label="Wheel Alignment"
                       onChange={(e) => {
-                       
                         const { serviceType } = formData;
                         if (e.target.checked) {
-                          serviceType.push('Tire or Wheel Alignment');
+                          serviceType.push('Wheel Alignment');
                         } else {
-                          const index = serviceType.indexOf('Tire or Wheel Alignment');
+                          const index = serviceType.indexOf('Wheel Alignment');
                           if (index !== -1) {
                             serviceType.splice(index, 1);
                           }
@@ -240,6 +291,11 @@ const Orders = () => {
                       }}
                     />
                   </Grid>
+                  {errors.serviceType && (
+                    <Grid item xs={12}>
+                      <Typography color="error">{errors.serviceType}</Typography>
+                    </Grid>
+                  )}
                 </>
               )}
               {showProductForm && (
@@ -254,92 +310,36 @@ const Orders = () => {
                       variant="outlined"
                       required
                       margin="normal"
+                      error={!!errors.productType}
+                      helperText={errors.productType}
                     >
-                      {['PCR Tires', 'Bike Tires', 'Batteries'].map((type) => (
+                      {['Type 1', 'Type 2', 'Type 3'].map((type) => (
                         <MenuItem key={type} value={type}>
                           {type}
                         </MenuItem>
                       ))}
                     </TextField>
                   </Grid>
-                  {formData.productType === 'PCR Tires' && (
-                    <Grid item xs={4}>
-                      <TextField
-                        select
-                        label="Size"
-                        value={formData.size}
-                        onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                        fullWidth
-                        variant="outlined"
-                        required
-                        margin="normal"
-                      >
-                        {[
-                          '195-15', '185-14', '195-14', '165-14', '145-70-12', '145-80-12', '155-12',
-                          '155-80-12', '155-70-12', '155-65-13', '165-65-13', '165-80-13', '185-70-14',
-                          '175-70-14', '175-70-13', '175-70-13', '175-65-15', '185-65-15', '185-65-15',
-                          '195-65-15', '175-65-15', '185-55-16', '165-70-14', '155-70-12', '155-80-13',
-                          '165-70-13', '155-70-13', '155-65-14', '155-65-14', '165-55-14', '165-55-14',
-                          '165-13', '155-65-13',
-                        ].map((size) => (
-                          <MenuItem key={size} value={size}>
-                            {size}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                  )}
-                  {formData.productType === 'Bike Tires' && (
-                    <Grid item xs={4}>
-                      <TextField
-                        select
-                        label="Size"
-                        value={formData.size}
-                        onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                        fullWidth
-                        variant="outlined"
-                        required
-                        margin="normal"
-                      >
-                        {[
-                          '130-90-15', '140-60-17', '90-90-17', '100-90-10', '100-90-18', '100-90-17',
-                          '300-18', '300-18', '275-18', '120-80-17', '120-80-16', '90-90-17', '110/80/10',
-                          '275-17', '140-70-17', '300-17', '110-80-17', '110-80-12', '100-80-12', '250-17',
-                          '225-17', '275-14', '275-18', '300-17', '300-17', '275-17', '90/90/12',
-                          '140-60-17', '130-70-17', '100-90-18', '300-17', '90-90-18', '275-18', '100-80-17',
-                          '120/70/13', '130/70/13', '100-90-14', '90-90-14',
-                        ].map((size) => (
-                          <MenuItem key={size} value={size}>
-                            {size}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                  )}
-                  {formData.productType === 'Batteries' && (
-                    <Grid item xs={4}>
-                      <TextField
-                        select
-                        label="Size"
-                        value={formData.size}
-                        onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                        fullWidth
-                        variant="outlined"
-                        required
-                        margin="normal"
-                      >
-                        {[
-                          '500 ML W/B', '1 L', 'Acid  1 L', 'Acid  750', 'Acid 500', '65 AH', '12v4  MF',
-                          'Utz-5s', '6N6- 3B', 'YB5L-BS', 'UTZ-7L-BS', 'YB7B-BS', 'YB2-5L-BS', 'UTX5L-BS',
-                          '12N9-BS', 'UTX9-BS', 'UTX7A-BS',
-                        ].map((size) => (
-                          <MenuItem key={size} value={size}>
-                            {size}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                  )}
+                  <Grid item xs={4}>
+                    <TextField
+                      select
+                      label="Size"
+                      value={formData.size}
+                      onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+                      fullWidth
+                      variant="outlined"
+                      required
+                      margin="normal"
+                      error={!!errors.size}
+                      helperText={errors.size}
+                    >
+                      {['Small', 'Medium', 'Large'].map((size) => (
+                        <MenuItem key={size} value={size}>
+                          {size}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
                 </>
               )}
               <Grid item xs={4}>
@@ -351,37 +351,47 @@ const Orders = () => {
                   variant="outlined"
                   required
                   margin="normal"
+                  error={!!errors.totalAmount}
+                  helperText={errors.totalAmount}
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" color="primary" onClick={handleAddOrder}>
+                  Add
+                </Button>
               </Grid>
             </Grid>
           </Box>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>Customer ID</TableCell>
-                  <TableCell>Order Date</TableCell>
-                  <TableCell>Order Type</TableCell>
-                  <TableCell>Total Amount</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {orders.map((order) => (
-                  <TableRow key={order.orderId}>
-                    <TableCell>{order.orderId}</TableCell>
-                    <TableCell>{order.customerId}</TableCell>
-                    <TableCell>{order.orderDate}</TableCell>
-                    <TableCell>{order.orderType}</TableCell>
-                    <TableCell>{order.totalAmount}</TableCell>
-                    <TableCell>
-                      <TextField
-                        select
-                        value={order.status}
-                        onChange={(e) => handleStatusChange(order.orderId, e.target.value)}
-                        fullWidth
+          <Box mt={3}>
+            <Typography variant="h5" gutterBottom>Orders Table</Typography>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Order ID</TableCell>
+                    <TableCell>Customer ID</TableCell>
+                    <TableCell>Order Date</TableCell>
+                    <TableCell>Order Type</TableCell>
+                    <TableCell>Total Amount</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map(order => (
+                    <TableRow key={order.orderId}>
+                      <TableCell>{order.orderId}</TableCell>
+                      <TableCell>{order.customerId}</TableCell>
+                      <TableCell>{order.orderDate}</TableCell>
+                      <TableCell>{order.orderType}</TableCell>
+                      <TableCell>{order.totalAmount}</TableCell>
+                      <TableCell>
+                        <TextField
+                          select
+                          value={order.status}
+                          onChange={(e) => handleStatusChange(order.orderId, e.target.value)}
+                          variant="outlined"
+                          size="small"
                         >
                           {['Pending', 'Completed', 'Cancelled'].map((status) => (
                             <MenuItem key={status} value={status}>
@@ -391,19 +401,20 @@ const Orders = () => {
                         </TextField>
                       </TableCell>
                       <TableCell>
-                      <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => handleDelete(order.orderId)}
-                      >
-                        Delete
-                      </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleDelete(order.orderId)}
+                        >
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
         </Box>
       </Box>
     </>
