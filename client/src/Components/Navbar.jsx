@@ -34,29 +34,29 @@ function ResponsiveAppBar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-end", // Align items to the right
-          gap: "20px", // Add space between the buttons
+          gap: "5px", // Add space between the buttons
         }}
       >
         <Button
           onClick={() => navigate("/home")}
-          sx={{ color: "white", fontSize: "18px" }}
+          sx={{ color: "white", fontSize: "17px" }}
         >
           Home
         </Button>
         <Button
           onClick={() => navigate("/products")}
-          sx={{ color: "white", fontSize: "18px" }}
+          sx={{ color: "white", fontSize: "17px" }}
         >
           Products
         </Button>
         <Button
           onClick={() => navigate("/services")}
-          sx={{ color: "white", fontSize: "18px" }}
+          sx={{ color: "white", fontSize: "17px" }}
         >
           Services
         </Button>
         <Button
-          sx={{ borderRadius: "50%", height: "60px", width: "60px", color: "#02054d", backgroundColor: "white" }}
+          sx={{ borderRadius: "50%", height: "60px", width: "40px", marginRight: "20px", color: "#02054d", backgroundColor: "white" }}
           variant="contained"
           onClick={() => navigate("/login")}
         >
