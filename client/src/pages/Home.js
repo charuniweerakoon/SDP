@@ -59,7 +59,7 @@ const RightBox = styled(Box)({
   marginTop: '30px',
 });
 
-function ResponsiveAppBar() {
+function Home() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -106,4 +106,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default Home;

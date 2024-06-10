@@ -1,4 +1,4 @@
-// UserContext.js
+// UserContext.js- this is for add the welcome!(name) near the profile icon
 import React, { createContext, useState } from 'react';
 
 export const UserContext = createContext();

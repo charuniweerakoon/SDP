@@ -124,7 +124,7 @@ const Rectangle = styled(Box)({
 });
 
 
-function ResponsiveAppBar() {
+function Products() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -179,4 +179,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default Products;

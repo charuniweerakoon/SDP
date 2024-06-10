@@ -105,7 +105,7 @@ const Rectangle = styled(Box)({
   marginTop: '-20px'
 });
 
-function ResponsiveAppBar() {
+function Services() {
   return (
     <div>
       <Navbar/>
@@ -142,4 +142,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default Services;
