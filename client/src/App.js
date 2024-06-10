@@ -16,6 +16,7 @@ import Staff from "./pages/Shop/Staff";
 import ProductList from "./pages/Shop/ProductList";
 import ServiceList from "./pages/Shop/ServiceList";
 import Orders from "./pages/Shop/Orders";
+import Dashboard from "./pages/Shop/Dashboard";
 import Messages from "./pages/Shop/Messages";
 import { AppBarTitleProvider } from "./pages/Shop/AppBarTitleContext";
 
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/servicelist" element={<ServiceList />} />
           <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/staff" element={<Staff />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/messages" element={<Messages />} />
           
         </Routes>

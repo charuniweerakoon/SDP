@@ -132,7 +132,7 @@ function ResponsiveAppBar() {
                 justifyContent: "flex-end",
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <Button
                   key={page.title}
                   component={Link}
@@ -146,7 +146,7 @@ function ResponsiveAppBar() {
                 >
                   {page.title}
                 </Button>
-              ))}
+              ))} */}
             </Box>
           </Toolbar>
         </Container>

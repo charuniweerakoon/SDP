@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, TextField, Button, Typography, Box, Link } from '@mui/material';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import backgroundImage from './images/bg.jpg'; // Update with your image path
 import shopIcon from './images/logo C.png'; // Update with your shop icon path
@@ -83,12 +83,6 @@ const Login = () => {
           >
             Log In
           </LoginButton>
-          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '20px' }}>
-            {"Don't have an account? "}
-            <Link href="#" variant="body2">
-              Sign up
-            </Link>
-          </Typography>
         </LoginBox>
       </Container>
     </Background>
