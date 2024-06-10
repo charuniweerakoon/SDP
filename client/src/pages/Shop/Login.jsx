@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 import backgroundImage from './images/bg.jpg'; // Update with your image path
 import shopIcon from './images/logo C.png'; // Update with your shop icon path
 
@@ -44,46 +45,81 @@ const LoginButton = styled(Button)({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ username: false, password: false });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = { username: false, password: false };
+
+    if (!username) {
+      newErrors.username = true;
+    }
+
+    if (!password) {
+      newErrors.password = true;
+    }
+
+    setErrors(newErrors);
+
+    if (!newErrors.username && !newErrors.password) {
+      // Simulate a successful login
+      navigate('/dashboard');
+    }
+  };
+
   return (
     <Background>
       <Container component="main" maxWidth="xs">
-        <LoginBox>
-          <Box display="flex" alignItems="center" width="100%">
-            <ShopIcon src={shopIcon} alt="Shop Icon" />
-            <Typography variant="h4" component="h1">
-              Welcome!
-            </Typography>
-          </Box>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <LoginButton
-            type="submit"
-            fullWidth
-            variant="contained"
-          >
-            Log In
-          </LoginButton>
-        </LoginBox>
+        <form onSubmit={handleSubmit}>
+          <LoginBox>
+            <Box display="flex" alignItems="center" width="100%">
+              <ShopIcon src={shopIcon} alt="Shop Icon" />
+              <Typography variant="h4" component="h1">
+                Welcome!
+              </Typography>
+            </Box>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              error={errors.username}
+              helperText={errors.username && 'Username is required'}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              helperText={errors.password && 'Password is required'}
+            />
+            <LoginButton
+              type="submit"
+              fullWidth
+              variant="contained"
+            >
+              Log In
+            </LoginButton>
+          </LoginBox>
+        </form>
       </Container>
     </Background>
   );

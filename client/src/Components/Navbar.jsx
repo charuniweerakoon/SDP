@@ -194,7 +194,7 @@ function ResponsiveAppBar() {
         }}
       >
         <Button onClick={() => navigate("/home")}>Home</Button>
-        <Button onClick={() => navigate("/products")}>Product</Button>
+        <Button onClick={() => navigate("/products")}>Products</Button>
         <Button onClick={() => navigate("/services")}>Services</Button>
       </div>
       <div
