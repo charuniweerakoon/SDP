@@ -51,7 +51,7 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { UserProvider } from './pages/Shop/UserContext';
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Services from "./pages/Services";
@@ -73,6 +73,7 @@ import Dashboard from "./pages/Shop/Dashboard";
 
 export default function App() {
   return (
+    <UserProvider>
     <AppBarTitleProvider>
       <Router>
         <Routes>
@@ -96,5 +97,6 @@ export default function App() {
         </Routes>
       </Router>
     </AppBarTitleProvider>
+    </UserProvider>
   );
 }
