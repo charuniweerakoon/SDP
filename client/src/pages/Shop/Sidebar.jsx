@@ -240,7 +240,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import AssessmentIcon from '@mui/icons-material/Assessment';
 import MessageIcon from '@mui/icons-material/Message';
 import { useNavigate } from 'react-router-dom';
 import logo from './images/logo C.png'; // Update with your logo path
@@ -331,10 +330,6 @@ const SidebarNavigation = () => {
           <ListItemIcon><LocalShippingIcon sx={{ color: "white" }} /></ListItemIcon>
           <ListItemText primary="Suppliers" />
         </CustomListItem>
-        <CustomListItem button onClick={() => handleNavigation('/reports', 'Reports')}>
-          <ListItemIcon><AssessmentIcon sx={{ color: "white" }} /></ListItemIcon>
-          <ListItemText primary="Reports" />
-        </CustomListItem>
         <CustomListItem button onClick={() => handleNavigation('/messages', 'Messages')}>
           <ListItemIcon><MessageIcon sx={{ color: "white" }} /></ListItemIcon>
           <ListItemText primary="Messages" />
@@ -356,3 +351,4 @@ const SidebarNavigation = () => {
 };
 
 export default SidebarNavigation;
+

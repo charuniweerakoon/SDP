@@ -139,7 +139,7 @@ const Background = styled(Box)({
   backgroundImage: `url(${backgroundImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  opacity: 0.9,
+  opacity: 1,
   position: 'absolute',
   width: '100%',
   height: '100%',
@@ -155,6 +155,7 @@ const LoginBox = styled(Box)({
   alignItems: 'center',
   backgroundColor: 'white',
   padding: '30px',
+  opacity: 0.5,
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
 });
