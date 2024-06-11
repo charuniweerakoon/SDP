@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Typography } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";
 
@@ -9,12 +9,13 @@ const Staff = () => {
     name: '',
     contactNumber: '',
     email: '',
-    nicNumber: ''
+    nicNumber: '',
+    role: ''
   });
 
   const [rows, setRows] = useState([
-    { staffId: 'S001', name: 'John Doe', contactNumber: '123456789', email: 'johndoe@example.com', nicNumber: '123456789V' },
-    { staffId: 'S002', name: 'Jane Smith', contactNumber: '987654321', email: 'janesmith@example.com', nicNumber: '987654321V' },
+    { staffId: 'S001', name: 'John Doe', contactNumber: '123456789', email: 'johndoe@example.com', nicNumber: '123456789V', role: 'admin' },
+    { staffId: 'S002', name: 'Jane Smith', contactNumber: '987654321', email: 'janesmith@example.com', nicNumber: '987654321V', role: 'staff' },
     // Add more rows as needed
   ]);
 
@@ -30,7 +31,7 @@ const Staff = () => {
 
   const addMember = () => {
     // Check if any required field is empty
-    if (!newMember.name || !newMember.contactNumber || !newMember.email || !newMember.nicNumber) {
+    if (!newMember.name || !newMember.contactNumber || !newMember.email || !newMember.nicNumber || !newMember.role) {
       alert('Please fill in all required fields');
       return;
     }
@@ -42,7 +43,8 @@ const Staff = () => {
       name: '',
       contactNumber: '',
       email: '',
-      nicNumber: ''
+      nicNumber: '',
+      role: ''
     });
   };
 
@@ -61,7 +63,8 @@ const Staff = () => {
       name: '',
       contactNumber: '',
       email: '',
-      nicNumber: ''
+      nicNumber: '',
+      role: ''
     });
   };
 
@@ -121,6 +124,18 @@ const Staff = () => {
               required
               sx={{ mr: 2 }}
             />
+            <FormControl required sx={{ mr: 2, minWidth: 120 }}>
+              <InputLabel>Role</InputLabel>
+              <Select
+                name="role"
+                value={newMember.role}
+                onChange={handleInputChange}
+              >
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="staff">Staff</MenuItem>
+                <MenuItem value="worker">Worker</MenuItem>
+              </Select>
+            </FormControl>
             <Button variant="contained" onClick={addMember} sx={{ ml: 'auto', mb: 2 }}>Add</Button>
           </Box>
           <Typography variant="h5" gutterBottom>Staff Details</Typography>
@@ -133,6 +148,7 @@ const Staff = () => {
                   <TableCell>Contact Number</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>NIC Number</TableCell>
+                  <TableCell>Role</TableCell>
                   <TableCell>Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -144,6 +160,7 @@ const Staff = () => {
                     <TableCell>{row.contactNumber}</TableCell>
                     <TableCell>{row.email}</TableCell>
                     <TableCell>{row.nicNumber}</TableCell>
+                    <TableCell>{row.role}</TableCell>
                     <TableCell>
                       <Button variant="contained" onClick={() => deleteMember(row.staffId)}>Delete</Button>
                       <Button variant="contained" onClick={() => updateMember(row.staffId)} sx={{ ml: 1 }}>Update</Button>
