@@ -155,7 +155,7 @@ const LoginBox = styled(Box)({
   alignItems: 'center',
   backgroundColor: 'white',
   padding: '30px',
-  opacity: 0.5,
+  opacity: 0.7,
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
 });
