@@ -4,8 +4,8 @@ import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";
 
 const originalSuppliers = [
-  { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
-  { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
+  // { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
+  // { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
   // Add more rows as needed
 ];
 

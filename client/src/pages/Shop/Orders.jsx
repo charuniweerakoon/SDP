@@ -22,8 +22,8 @@ import SidebarNavigation from './Sidebar';
 const Orders = () => {
   // Sample data for illustration, replace with actual data from your database
   const ordersData = [
-    { orderId: '1', customerId: '1', orderDate: '2024-07-01', orderType: 'Service', totalAmount: '100.00', status: 'Pending' },
-    { orderId: '2', customerId: '2', orderDate: '2024-07-02', orderType: 'Product', totalAmount: '50.00', status: 'Completed' },
+    // { orderId: '1', customerId: '1', orderDate: '2024-07-01', orderType: 'Service', totalAmount: '100.00', status: 'Pending' },
+    // { orderId: '2', customerId: '2', orderDate: '2024-07-02', orderType: 'Product', totalAmount: '50.00', status: 'Completed' },
     // Add more orders as needed
   ];
 

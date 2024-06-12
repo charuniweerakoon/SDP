@@ -8,9 +8,9 @@ const Message = () => {
   const [filteredRows, setFilteredRows] = useState([]);
 
   const rows = [
-    { customerId: 'C001', orderId: 'O001', message: 'Order delivered successfully.' },
-    { customerId: 'C002', orderId: 'O002', message: 'Order delayed due to weather conditions.' },
-    { customerId: 'C003', orderId: 'O003', message: 'Customer requested for a callback.' },
+    // { customerId: 'C001', orderId: 'O001', message: 'Order delivered successfully.' },
+    // { customerId: 'C002', orderId: 'O002', message: 'Order delayed due to weather conditions.' },
+    // { customerId: 'C003', orderId: 'O003', message: 'Customer requested for a callback.' },
     // Add more rows as needed
   ];
 

@@ -159,8 +159,8 @@ const ServiceList = () => {
   });
 
   const [services, setServices] = useState([
-    { serviceId: '1', serviceName: 'Service 1', price: '10', description: 'Description 1' },
-    { serviceId: '2', serviceName: 'Service 2', price: '20', description: 'Description 2' },
+    // { serviceId: '1', serviceName: 'Service 1', price: '10', description: 'Description 1' },
+    // { serviceId: '2', serviceName: 'Service 2', price: '20', description: 'Description 2' },
     // Add more services as needed
   ]);
 
