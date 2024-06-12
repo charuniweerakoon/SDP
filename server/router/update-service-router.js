@@ -1,11 +1,11 @@
 import express from 'express';
-import {addServiceController} from '../controller/service-controller.js';
+import {updateServiceController} from '../controller/update-service-controller.js';
 
 const router = express.Router();
 
 //add customer
 // router.post('/customer', addcustomerController);
 //get customer
-router.post('/addServiceController',addServiceController)
+router.put('/updateServiceController',updateServiceController)
 
 export default router;
