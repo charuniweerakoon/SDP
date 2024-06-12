@@ -11,6 +11,10 @@ import deleteProductRoutes from './router/delete-product-router.js';
 import addStaffRoutes from './router/add-staff-router.js';
 import updateStaffRoutes from './router/update-staff-router.js';
 import deleteStaffRoutes from './router/delete-staff-router.js';
+import addSupplierRoutes from './router/add-supplier-router.js';
+import updateSupplierRoutes from './router/update-supplier-router.js';
+import deleteSupplierRoutes from './router/delete-supplier-router.js';
+
 
 const app = express();
 dotenv.config();
@@ -28,6 +32,9 @@ app.use('/api/deleteProduct',deleteProductRoutes);
 app.use('/api/addStaff',addStaffRoutes);
 app.use('/api/updateStaff',updateStaffRoutes);
 app.use('/api/deleteStaff',deleteStaffRoutes);
+app.use('/api/addSupplier',addSupplierRoutes);
+app.use('/api/updateSupplier',updateSupplierRoutes);
+app.use('/api/deleteSupplier',deleteSupplierRoutes);
 
 app.listen(8000, () => {
   console.log(`Server is running on port ${8000}`);
