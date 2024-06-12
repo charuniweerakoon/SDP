@@ -70,7 +70,7 @@ import Orders from "./pages/Shop/Orders";
 import Messages from "./pages/Shop/Messages";
 import { AppBarTitleProvider } from "./pages/Shop/AppBarTitleContext";
 import Dashboard from "./pages/Shop/Dashboard";
-import Logout from "./pages/Shop/Logout";
+// import Logout from "./pages/Shop/Logout";
 
 export default function App() {
   return (
