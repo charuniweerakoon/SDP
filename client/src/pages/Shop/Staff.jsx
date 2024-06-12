@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";
+import axios from 'axios';
 
 const Staff = () => {
   const [newMember, setNewMember] = useState({
@@ -13,11 +14,7 @@ const Staff = () => {
     role: ''
   });
 
-  const [rows, setRows] = useState([
-    { staffId: 'S001', name: 'John Doe', contactNumber: '123456789', email: 'johndoe@example.com', nicNumber: '123456789V', role: 'admin' },
-    { staffId: 'S002', name: 'Jane Smith', contactNumber: '987654321', email: 'janesmith@example.com', nicNumber: '987654321V', role: 'staff' },
-    // Add more rows as needed
-  ]);
+  const [rows, setRows] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,43 +26,62 @@ const Staff = () => {
     }));
   };
 
-  const addMember = () => {
-    // Check if any required field is empty
+  const addMember = async () => {
     if (!newMember.name || !newMember.contactNumber || !newMember.email || !newMember.nicNumber || !newMember.role) {
       alert('Please fill in all required fields');
       return;
     }
 
-    // Add the new member to the rows state
-    setRows([...rows, { ...newMember }]);
-    setNewMember({
-      staffId: '',
-      name: '',
-      contactNumber: '',
-      email: '',
-      nicNumber: '',
-      role: ''
-    });
+    try {
+      const response = await axios.post('/api/staff/addStaff', newMember);
+      alert(response.data.message);
+      setRows([...rows, newMember]);
+      setNewMember({
+        staffId: '',
+        name: '',
+        contactNumber: '',
+        email: '',
+        nicNumber: '',
+        role: ''
+      });
+    } catch (error) {
+      console.error(error);
+      alert('Failed to add staff member');
+    }
   };
 
-  const deleteMember = (staffId) => {
-    setRows(rows.filter((row) => row.staffId !== staffId));
+  const deleteMember = async (staffId) => {
+    try {
+      const response = await axios.delete('/api/staff/deleteStaff', { data: { staff_id: staffId } });
+      alert(response.data.message);
+      setRows(rows.filter((row) => row.staffId !== staffId));
+    } catch (error) {
+      console.error(error);
+      alert('Failed to delete staff member');
+    }
   };
 
-  const updateMember = (staffId) => {
-    setRows(
-      rows.map((row) =>
-        row.staffId === staffId ? { ...newMember, staffId: row.staffId } : row
-      )
-    );
-    setNewMember({
-      staffId: '',
-      name: '',
-      contactNumber: '',
-      email: '',
-      nicNumber: '',
-      role: ''
-    });
+  const updateMember = async (staffId) => {
+    try {
+      const response = await axios.put('/api/staff/updateStaff', { ...newMember, staff_id: staffId });
+      alert(response.data.message);
+      setRows(
+        rows.map((row) =>
+          row.staffId === staffId ? { ...newMember, staffId: row.staffId } : row
+        )
+      );
+      setNewMember({
+        staffId: '',
+        name: '',
+        contactNumber: '',
+        email: '',
+        nicNumber: '',
+        role: ''
+      });
+    } catch (error) {
+      console.error(error);
+      alert('Failed to update staff member');
+    }
   };
 
   const filteredRows = rows.filter(

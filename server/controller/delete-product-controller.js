@@ -1,3 +1,5 @@
+import {db} from '../env.js';
+
 export const deleteProductController = async (req, res) => {
     const { productId } = req.body;
 

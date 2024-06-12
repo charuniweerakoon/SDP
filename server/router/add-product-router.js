@@ -10,6 +10,7 @@
 
 // export default router;
 
+
 import express from 'express';
 import {addProductController} from '../controller/add-product-controller.js';
 
@@ -18,3 +19,4 @@ const router = express.Router();
 router.post('/addProductController',addProductController)
 
 export default router;
+

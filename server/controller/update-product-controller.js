@@ -1,3 +1,5 @@
+import {db} from '../env.js';
+
 export const updateProductController = async (req, res) => {
     const { productId, supplier, purchasePrice, salePrice, type, size, availableQuantity } = req.body;
 
