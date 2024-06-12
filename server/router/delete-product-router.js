@@ -3,6 +3,6 @@ import {deleteProductController} from '../controller/delete-product-controller.j
 
 const router = express.Router();
 
-router.post('/deleteProductController',deleteProductController)
+router.delete('/deleteProductController',deleteProductController)
 
 export default router;

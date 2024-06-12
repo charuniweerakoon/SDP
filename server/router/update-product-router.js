@@ -3,6 +3,6 @@ import {updateProductController} from '../controller/update-product-controller.j
 
 const router = express.Router();
 
-router.post('/updateProductController',updateProductController)
+router.put('/updateProductController',updateProductController)
 
 export default router;
