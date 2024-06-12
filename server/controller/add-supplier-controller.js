@@ -1,11 +1,11 @@
 import {db} from '../env.js';
 
 export const addSupplierController = async (req, res) => {
-    const { supplier_id, company_name, contact_name, phone, email } = req.body;
+    const { company_name, contact_name, phone, email } = req.body;
 
     try {
-        const query = `INSERT INTO suppliers (supplier_id, company_name, contact_name, phone, email) VALUES (?, ?, ?, ?, ?)`;
-        db.query(query, [supplier_id, company_name, contact_name, phone, email], (err, result) => {
+        const query = `INSERT INTO suppliers (company_name, contact_name, phone, email) VALUES (?, ?, ?, ?)`;
+        db.query(query, [company_name, contact_name, phone, email], (err, result) => {
             if (err) {
                 return res.status(500).json({ message: err.message });
             } else {
@@ -16,3 +16,4 @@ export const addSupplierController = async (req, res) => {
         return res.status(500).json({ message: err.message });
     }
 };
+

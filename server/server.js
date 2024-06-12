@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import bodyParser from 'body-parser';
 import customerRoutes from './router/customer-router.js';
+// import supplierRoutes from './router/supplier-router.js';
 // import serviceRoutes from './router/service-router.js';
 import addProductRoutes from './router/add-product-router.js';
 import updateProductRoutes from './router/update-product-router.js';
@@ -18,8 +19,9 @@ import deleteSupplierRoutes from './router/delete-supplier-router.js';
 import addServiceRoutes from './router/add-service-router.js';
 import updateServiceRoutes from './router/update-service-router.js';
 import deleteServiceRoutes from './router/delete-service-router.js';
-import getNextStaffIdRoutes from './router/staffidRouter.js';
-import getNextServiceIdRoutes from './router/serviceidRouter.js';
+// import getNextStaffIdRoutes from './router/staffidRouter.js';
+// import getNextServiceIdRoutes from './router/serviceidRouter.js';
+// import getNextSupplierIdRoutes from './router/supplieridRouter.js';
 
 
 const app = express();
@@ -33,6 +35,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 app.use('/api/customers', customerRoutes);
+// app.use('/api/supplier', supplierRoutes);
 // app.use('/api/service',serviceRoutes);
 app.use('/api/addProduct',addProductRoutes);
 app.use('/api/updateProduct',updateProductRoutes);
@@ -46,8 +49,9 @@ app.use('/api/deleteSupplier',deleteSupplierRoutes);
 app.use('/api/addService', addServiceRoutes);
 app.use('/api/updateService', updateServiceRoutes);
 app.use('/api/deleteService', deleteServiceRoutes);
-app.use('/api/getNextStaffId', getNextStaffIdRoutes);
-app.use('/api/getNextServiceId', getNextServiceIdRoutes);
+// app.use('/api/getNextStaffId', getNextStaffIdRoutes);
+// app.use('/api/getNextServiceId', getNextServiceIdRoutes);
+// app.use('/api/getNextSupplierId', getNextSupplierIdRoutes);
 
 app.listen(8000, () => {
   console.log(`Server is running on port ${8000}`);

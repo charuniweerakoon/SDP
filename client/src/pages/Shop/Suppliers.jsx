@@ -1,8 +1,9 @@
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Grid } from '@mui/material';
 // import AppbarCompany from "./AppbarCompany";
 // import SidebarNavigation from "./Sidebar";
 
+// // Replace this with a fetch from the backend if needed
 // const originalSuppliers = [
 //   // { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
 //   // { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
@@ -15,21 +16,63 @@
 //   const [isEditing, setIsEditing] = useState(false);
 //   const [searchTerm, setSearchTerm] = useState('');
 
-  
+//   useEffect(() => {
+//     fetchSuppliers();
+//   }, []);
+
+//   const fetchSuppliers = async () => {
+//     try {
+//       const response = await fetch('/api/supplier');
+//       const data = await response.json();
+//       setSuppliers(data);
+//     } catch (error) {
+//       console.error('Error fetching suppliers:', error);
+//     }
+//   };
+
 //   const handleInputChange = (e) => {
 //     const { name, value } = e.target;
 //     setForm({ ...form, [name]: value });
 //   };
 
-//   const handleSubmit = (e) => {
+//   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     if (isEditing) {
-//       setSuppliers(suppliers.map(supplier => supplier.id === form.id ? form : supplier));
+//       await updateSupplier(form);
 //       setIsEditing(false);
 //     } else {
-//       setSuppliers([...suppliers, form]);
+//       await addSupplier(form);
 //     }
 //     setForm({ companyName: '', contactName: '', phone: '', email: '' });
+//     fetchSuppliers();
+//   };
+
+//   const addSupplier = async (supplier) => {
+//     try {
+//       const response = await fetch('/api/suppliers/add', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(supplier),
+//       });
+//       const data = await response.json();
+//       console.log(data.message);
+//     } catch (error) {
+//       console.error('Error adding supplier:', error);
+//     }
+//   };
+
+//   const updateSupplier = async (supplier) => {
+//     try {
+//       const response = await fetch('/api/suppliers/update', {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(supplier),
+//       });
+//       const data = await response.json();
+//       console.log(data.message);
+//     } catch (error) {
+//       console.error('Error updating supplier:', error);
+//     }
 //   };
 
 //   const handleEdit = (supplier) => {
@@ -37,8 +80,19 @@
 //     setIsEditing(true);
 //   };
 
-//   const handleDelete = (id) => {
-//     setSuppliers(suppliers.filter(supplier => supplier.id !== id));
+//   const handleDelete = async (id) => {
+//     try {
+//       const response = await fetch('/api/suppliers/delete', {
+//         method: 'DELETE',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ supplier_id: id }),
+//       });
+//       const data = await response.json();
+//       console.log(data.message);
+//       fetchSuppliers();
+//     } catch (error) {
+//       console.error('Error deleting supplier:', error);
+//     }
 //   };
 
 //   const handleSearchInputChange = (e) => {
@@ -46,7 +100,7 @@
 //   };
 
 //   const handleSearch = () => {
-//     const filteredSuppliers = originalSuppliers.filter(
+//     const filteredSuppliers = suppliers.filter(
 //       (supplier) =>
 //         supplier.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
 //         supplier.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -58,7 +112,7 @@
 
 //   const handleReset = () => {
 //     setSearchTerm('');
-//     setSuppliers(originalSuppliers);
+//     fetchSuppliers();
 //   };
 
 //   return (
@@ -177,15 +231,8 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import AppbarCompany from "./AppbarCompany";
 import SidebarNavigation from "./Sidebar";
 
-// Replace this with a fetch from the backend if needed
-const originalSuppliers = [
-  // { id: 'S001', companyName: 'Company A', contactName: 'John Doe', phone: '1234567890', email: 'john@example.com' },
-  // { id: 'S002', companyName: 'Company B', contactName: 'Jane Doe', phone: '0987654321', email: 'jane@example.com' },
-  // Add more rows as needed
-];
-
 const Suppliers = () => {
-  const [suppliers, setSuppliers] = useState(originalSuppliers);
+  const [suppliers, setSuppliers] = useState([]);
   const [form, setForm] = useState({ companyName: '', contactName: '', phone: '', email: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -215,7 +262,7 @@ const Suppliers = () => {
       await updateSupplier(form);
       setIsEditing(false);
     } else {
-      await addSupplier({ ...form, id: generateSupplierId() });
+      await addSupplier(form);
     }
     setForm({ companyName: '', contactName: '', phone: '', email: '' });
     fetchSuppliers();
@@ -223,7 +270,7 @@ const Suppliers = () => {
 
   const addSupplier = async (supplier) => {
     try {
-      const response = await fetch('/api/suppliers/add', {
+      const response = await fetch('/api/addSupplier', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(supplier),
@@ -237,7 +284,7 @@ const Suppliers = () => {
 
   const updateSupplier = async (supplier) => {
     try {
-      const response = await fetch('/api/suppliers/update', {
+      const response = await fetch('/api/updateSupplier', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(supplier),
@@ -256,10 +303,10 @@ const Suppliers = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch('/api/suppliers/delete', {
+      const response = await fetch('/api/deleteSupplier', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ supplier_id: id }),
+        body: JSON.stringify({ id }),
       });
       const data = await response.json();
       console.log(data.message);
@@ -287,10 +334,6 @@ const Suppliers = () => {
   const handleReset = () => {
     setSearchTerm('');
     fetchSuppliers();
-  };
-
-  const generateSupplierId = () => {
-    return 'S' + (suppliers.length + 1).toString().padStart(3, '0');
   };
 
   return (
