@@ -19,6 +19,7 @@ import addServiceRoutes from './router/add-service-router.js';
 import updateServiceRoutes from './router/update-service-router.js';
 import deleteServiceRoutes from './router/delete-service-router.js';
 import getNextStaffIdRoutes from './router/staffidRouter.js';
+import getNextServiceIdRoutes from './router/serviceidRouter.js';
 
 
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api/addService', addServiceRoutes);
 app.use('/api/updateService', updateServiceRoutes);
 app.use('/api/deleteService', deleteServiceRoutes);
 app.use('/api/getNextStaffId', getNextStaffIdRoutes);
+app.use('/api/getNextServiceId', getNextServiceIdRoutes);
 
 app.listen(8000, () => {
   console.log(`Server is running on port ${8000}`);
