@@ -70,6 +70,7 @@ import Orders from "./pages/Shop/Orders";
 import Messages from "./pages/Shop/Messages";
 import { AppBarTitleProvider } from "./pages/Shop/AppBarTitleContext";
 import Dashboard from "./pages/Shop/Dashboard";
+import Logout from "./pages/Shop/Logout";
 
 export default function App() {
   return (
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="/serviceorder" element={<ServiceOrder />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/sidebar" element={<SidebarNavigation />} />
           <Route path="/appbarcompany" element={<AppbarCompany />} />
